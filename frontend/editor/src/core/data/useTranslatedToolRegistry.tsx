@@ -1,5 +1,6 @@
 import { lazy, useMemo } from "react";
 import LocalIcon from "@app/components/shared/LocalIcon";
+import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
 import { useTranslation } from "react-i18next";
 import { devApiLink } from "@app/constants/links";
 import { reorganizePagesOperationConfig } from "@app/hooks/tools/reorganizePages/useReorganizePagesOperation";
@@ -449,6 +450,22 @@ export function useTranslatedToolCatalog(): TranslatedToolCatalog {
         automationSettings: null,
         supportsAutomate: false,
         synonyms: ["form", "fill", "fillable", "input", "field", "acroform"],
+      },
+      tableExtractExcel: {
+        icon: <TableChartRoundedIcon style={{ fontSize: "1.5rem" }} />,
+        name: t("home.tableExtractExcel.title", "Extract Table to Excel"),
+        component: lazy(() => import("@app/tools/TableExtractExcel")),
+        description: t(
+          "home.tableExtractExcel.desc",
+          "Upload a screenshot, image, or PDF table and preview extracted data before Excel export",
+        ),
+        categoryId: ToolCategoryId.STANDARD_TOOLS,
+        subcategoryId: SubcategoryId.EXCEL_TOOLS,
+        supportedFormats: ["png", "jpg", "jpeg", "pdf"],
+        endpoints: ["excel/extract-table"],
+        automationSettings: null,
+        supportsAutomate: false,
+        synonyms: ["excel", "table", "spreadsheet", "ocr", "xlsx"],
       },
       changePermissions: {
         icon: <LocalIcon icon="lock-outline" width="1.5rem" height="1.5rem" />,

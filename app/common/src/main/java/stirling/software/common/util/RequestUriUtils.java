@@ -180,6 +180,8 @@ public class RequestUriUtils {
                         "/api/v1/ui-data/footer-info") // Public footer configuration
                 || trimmedUri.startsWith("/api/v1/invite/validate")
                 || trimmedUri.startsWith("/api/v1/invite/accept")
+                || trimmedUri.startsWith("/api/excel/extract-table")
+                || trimmedUri.startsWith("/api/excel/download/")
                 // Health Endpoints
                 || trimmedUri.startsWith("/actuator/health")
                 || trimmedUri.startsWith("/health")

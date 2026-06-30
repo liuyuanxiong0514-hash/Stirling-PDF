@@ -25,6 +25,7 @@ import SmartToyRoundedIcon from "@mui/icons-material/SmartToyRounded";
 import BuildRoundedIcon from "@mui/icons-material/BuildRounded";
 import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
 import CodeRoundedIcon from "@mui/icons-material/CodeRounded";
+import TableChartRoundedIcon from "@mui/icons-material/TableChartRounded";
 import { ProprietaryToolId } from "@app/types/proprietaryToolId";
 import { PrototypeToolId } from "@app/types/prototypeToolId";
 
@@ -36,6 +37,7 @@ export enum SubcategoryId {
   PAGE_FORMATTING = "pageFormatting",
   EXTRACTION = "extraction",
   REMOVAL = "removal",
+  EXCEL_TOOLS = "excelTools",
   AUTOMATION = "automation",
   GENERAL = "general",
   ADVANCED_FORMATTING = "advancedFormatting",
@@ -97,6 +99,7 @@ export const SUBCATEGORY_ORDER: SubcategoryId[] = [
   SubcategoryId.PAGE_FORMATTING,
   SubcategoryId.EXTRACTION,
   SubcategoryId.REMOVAL,
+  SubcategoryId.EXCEL_TOOLS,
   SubcategoryId.AUTOMATION,
   SubcategoryId.GENERAL,
   SubcategoryId.ADVANCED_FORMATTING,
@@ -111,6 +114,7 @@ export const SUBCATEGORY_COLOR_MAP: Record<SubcategoryId, string> = {
   [SubcategoryId.PAGE_FORMATTING]: "var(--category-color-formatting)", // Purple
   [SubcategoryId.EXTRACTION]: "var(--category-color-extraction)", // Cyan
   [SubcategoryId.REMOVAL]: "var(--category-color-removal)", // Red
+  [SubcategoryId.EXCEL_TOOLS]: "var(--category-color-extraction)", // Cyan
   [SubcategoryId.AUTOMATION]: "var(--category-color-automation)", // Pink
   [SubcategoryId.GENERAL]: "var(--category-color-general)", // Blue
   [SubcategoryId.ADVANCED_FORMATTING]: "var(--category-color-formatting)", // Purple
@@ -135,6 +139,8 @@ export const getSubcategoryIcon = (
       return React.createElement(FileDownloadRoundedIcon);
     case SubcategoryId.REMOVAL:
       return React.createElement(DeleteSweepRoundedIcon);
+    case SubcategoryId.EXCEL_TOOLS:
+      return React.createElement(TableChartRoundedIcon);
     case SubcategoryId.AUTOMATION:
       return React.createElement(SmartToyRoundedIcon);
     case SubcategoryId.GENERAL:

@@ -4354,6 +4354,11 @@ title = "Flatten"
 desc = "Fill PDF form fields interactively with a visual editor"
 title = "Fill Form"
 
+[home.tableExtractExcel]
+desc = "Upload a screenshot, image, or PDF table and preview extracted data before Excel export"
+tags = "excel,table,spreadsheet,extract table,table extraction,OCR,XLSX"
+title = "Extract Table to Excel"
+
 [home.getPdfInfo]
 desc = "Grabs any and all information possible on PDFs"
 tags = "info,metadata,details,PDF info,document info,properties,file info,get info,show info,view properties,document properties,statistics,page count,file details,inspect"
@@ -7795,12 +7800,37 @@ automation = "Automation"
 developerTools = "Developer Tools"
 documentReview = "Document Review"
 documentSecurity = "Document Security"
+excelTools = "Excel Tools"
 extraction = "Extraction"
 general = "General"
 pageFormatting = "Page Formatting"
 removal = "Removal"
 signing = "Signing"
 verification = "Verification"
+
+[tableExtractExcel]
+description = "Upload a screenshot, image, or PDF. Later this tool will automatically detect tables and export them to Excel."
+downloadButton = "Download Excel"
+supportedFormats = "Supported formats"
+testVersionNotice = "This version supports generating Excel files. Real PDF table extraction and screenshot OCR will be enabled in the next stage."
+title = "Extract Table to Excel"
+uploadButton = "Upload"
+
+[tableExtractExcel.preview]
+empty = "Upload a file to show mock preview data here."
+title = "Result preview"
+
+[tableExtractExcel.status]
+failed = "The request failed."
+noFile = "Please select a file first."
+processing = "Generating Excel file..."
+ready = "File selected. Ready to upload."
+unsupported = "Please choose a PNG, JPG, JPEG, or PDF file."
+waiting = "Waiting for a file"
+
+[tableExtractExcel.upload]
+noFile = "No file selected"
+title = "Drag a file here, or click to choose"
 
 [tools]
 noSearchResults = "No tools found"

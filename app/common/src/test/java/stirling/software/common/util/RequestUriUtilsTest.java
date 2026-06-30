@@ -169,6 +169,18 @@ class RequestUriUtilsTest {
     }
 
     @Test
+    void testIsPublicAuthEndpoint_excelExtractTable() {
+        assertTrue(RequestUriUtils.isPublicAuthEndpoint("/api/excel/extract-table", ""));
+    }
+
+    @Test
+    void testIsPublicAuthEndpoint_excelDownload() {
+        assertTrue(
+                RequestUriUtils.isPublicAuthEndpoint(
+                        "/api/excel/download/123_table_extract_result.xlsx", ""));
+    }
+
+    @Test
     void testIsPublicAuthEndpoint_withContextPath() {
         assertTrue(RequestUriUtils.isPublicAuthEndpoint("/app/login", "/app"));
     }

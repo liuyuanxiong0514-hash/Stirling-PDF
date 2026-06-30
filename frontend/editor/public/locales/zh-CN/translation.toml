@@ -4314,6 +4314,11 @@ title = "展平"
 desc = "使用可视化编辑器交互式填写 PDF 表单字段"
 title = "填写表单"
 
+[home.tableExtractExcel]
+desc = "上传截图、图片或PDF表格，预览识别出的表格数据，并导出为Excel"
+tags = "Excel,表格,电子表格,表格提取,OCR,XLSX"
+title = "表格提取Excel"
+
 [home.getPdfInfo]
 desc = "获取 PDF 的所有可能的信息"
 tags = "信息,元数据,详细信息"
@@ -7755,12 +7760,37 @@ automation = "自动化"
 developerTools = "开发者工具"
 documentReview = "文档审阅"
 documentSecurity = "文档安全"
+excelTools = "Excel工具"
 extraction = "提取"
 general = "通用"
 pageFormatting = "页面格式"
 removal = "移除"
 signing = "签署"
 verification = "验证"
+
+[tableExtractExcel]
+description = "上传截图、图片或PDF，后续可自动识别其中的表格并导出为Excel。"
+downloadButton = "下载Excel"
+supportedFormats = "支持格式"
+testVersionNotice = "当前版本已支持生成Excel文件。PDF真实表格提取和截图OCR识别将在下一阶段启用。"
+title = "表格提取Excel"
+uploadButton = "上传"
+
+[tableExtractExcel.preview]
+empty = "上传文件后，这里会显示模拟表格数据。"
+title = "结果预览"
+
+[tableExtractExcel.status]
+failed = "请求失败。"
+noFile = "请先选择文件。"
+processing = "正在生成Excel文件..."
+ready = "文件已选择，可以上传。"
+unsupported = "请选择 PNG、JPG、JPEG 或 PDF 文件。"
+waiting = "等待选择文件"
+
+[tableExtractExcel.upload]
+noFile = "未选择文件"
+title = "拖拽文件到这里，或点击选择"
 
 [tools]
 noSearchResults = "未找到工具"
