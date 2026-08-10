@@ -174,6 +174,12 @@ class RequestUriUtilsTest {
     }
 
     @Test
+    void testIsPublicAuthEndpoint_excelSmartExtract() {
+        assertTrue(RequestUriUtils.isPublicAuthEndpoint("/api/excel/smart-extract/preview", ""));
+        assertTrue(RequestUriUtils.isPublicAuthEndpoint("/api/excel/smart-extract/generate", ""));
+    }
+
+    @Test
     void testIsPublicAuthEndpoint_excelDownload() {
         assertTrue(
                 RequestUriUtils.isPublicAuthEndpoint(

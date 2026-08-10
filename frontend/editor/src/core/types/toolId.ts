@@ -63,7 +63,12 @@ export const CORE_REGULAR_TOOL_IDS = [
   "bookletImposition",
   "pdfTextEditor",
   "formFill",
+  "excelToolsHome",
   "tableExtractExcel",
+  "smartExtractExcel",
+  "smartMergeExcel",
+  "smartCleanExcel",
+  "imageInfoExtractExcel",
 ] as const;
 
 export const CORE_SUPER_TOOL_IDS = ["multiTool", "read", "automate"] as const;

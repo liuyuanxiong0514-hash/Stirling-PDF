@@ -4096,6 +4096,7 @@ multimedia = "多媒体"
 [groupSigning.steps]
 back = "返回"
 completed = "已完成"
+extractingPdf = "正在提取PDF表格..."
 current = "当前"
 stepLabel = "步骤 {{number}}"
 
@@ -4318,6 +4319,89 @@ title = "填写表单"
 desc = "上传截图、图片或PDF表格，预览识别出的表格数据，并导出为Excel"
 tags = "Excel,表格,电子表格,表格提取,OCR,XLSX"
 title = "表格提取Excel"
+
+[home.smartExtractExcel]
+desc = "上传Excel，按字段、筛选、排序、分组规则提取数据并重新生成Excel"
+tags = "Excel,智能提取,电子表格,筛选,分组,XLSX"
+title = "智能提取重生成"
+
+[home.smartMergeExcel]
+desc = "上传多个Excel或多个Sheet，使用AI匹配字段并合并生成新的Excel"
+tags = "Excel,合并,追加,关联,电子表格,XLSX"
+title = "智能表格合并"
+
+[home.smartCleanExcel]
+desc = "上传Excel，检测数据质量问题，使用AI生成清洗规则并导出清洗后的Excel"
+tags = "Excel,清洗,标准化,去重,电子表格,XLSX"
+title = "智能数据清洗"
+
+[home.imageInfoExtractExcel]
+desc = "上传图片，OCR识别文字，使用AI整理字段并导出Excel"
+tags = "Excel,图片,OCR,发票,证件,收据"
+title = "图片信息提取表格"
+
+[excelCommon.aiRequirement]
+description = "用一句话说明你希望如何处理当前 Excel。"
+title = "描述你的需求"
+
+[excelCommon.aiResult]
+title = "AI理解结果"
+
+[excelCommon.buttons]
+aiAnalyze = "AI分析需求"
+confirmProcess = "确认并处理"
+downloadExcel = "下载Excel"
+
+[excelCommon.result]
+title = "处理完成"
+
+[excelCommon.steps]
+analyzeData = "分析数据"
+confirm = "确认结果"
+confirmPlan = "确认方案"
+download = "下载Excel"
+generate = "生成结果"
+recognize = "识别表格"
+requirement = "设置需求"
+selectData = "选择数据"
+upload = "上传文件"
+
+[excelCommon.upload]
+done = "已完成"
+failed = "处理失败"
+parsed = "解析完成"
+parsing = "正在解析"
+ready = "等待处理"
+
+[excelToolsHome]
+description = "选择表格提取、智能筛选、汇总统计、多表合并或数据清洗流程。"
+openButton = "进入工具"
+title = "Excel工具"
+
+[excelToolsHome.smartClean]
+desc = "检测并处理重复、空值、日期和金额格式等数据问题。"
+
+[excelToolsHome.imageInfoExtract]
+desc = "从发票、营业执照、快递单、合同和图片中识别文字，整理成结构化Excel。"
+
+[excelToolsHome.smartExtract]
+desc = "按字段、条件和自然语言需求筛选数据并重新生成 Excel。"
+
+[excelToolsHome.smartMerge]
+desc = "合并多个 Excel 或多个 Sheet，并自动统一字段。"
+
+[excelToolsHome.steps]
+choose = "选择工具"
+download = "下载Excel"
+process = "处理数据"
+upload = "上传数据"
+
+[excelToolsHome.summary]
+desc = "按部门、项目、人员等字段汇总金额、数量和平均值。"
+title = "AI汇总统计"
+
+[excelToolsHome.tableExtract]
+desc = "从 PDF、截图和扫描件中识别表格并生成 Excel。"
 
 [home.getPdfInfo]
 desc = "获取 PDF 的所有可能的信息"
@@ -7769,21 +7853,28 @@ signing = "签署"
 verification = "验证"
 
 [tableExtractExcel]
-description = "上传截图、图片或PDF，后续可自动识别其中的表格并导出为Excel。"
+description = "上传截图、图片或PDF，系统会识别其中的表格并导出为Excel。"
 downloadButton = "下载Excel"
+qualityLabel = "识别质量"
+reuploadButton = "重新上传"
 supportedFormats = "支持格式"
-testVersionNotice = "当前版本已支持生成Excel文件。PDF真实表格提取和截图OCR识别将在下一阶段启用。"
+testVersionNotice = "当前支持文字型 PDF 表格提取、截图表格识别、图片表格识别、扫描版 PDF 表格识别。"
 title = "表格提取Excel"
 uploadButton = "上传"
 
 [tableExtractExcel.preview]
-empty = "上传文件后，这里会显示模拟表格数据。"
+empty = "上传文件后，这里会显示识别出的表格数据。"
 title = "结果预览"
 
 [tableExtractExcel.status]
 failed = "请求失败。"
+completed = "提取完成。"
+detectingType = "正在判断 PDF 类型并提取表格..."
+extractingPdf = "正在提取PDF表格..."
 noFile = "请先选择文件。"
+ocrProcessing = "正在进行 OCR 表格识别..."
 processing = "正在生成Excel文件..."
+uploading = "正在上传文件..."
 ready = "文件已选择，可以上传。"
 unsupported = "请选择 PNG、JPG、JPEG 或 PDF 文件。"
 waiting = "等待选择文件"
@@ -7791,6 +7882,206 @@ waiting = "等待选择文件"
 [tableExtractExcel.upload]
 noFile = "未选择文件"
 title = "拖拽文件到这里，或点击选择"
+
+[smartExtractExcel]
+description = "上传Excel后，可按字段、关键词、金额、日期、分组等条件提取数据，并重新生成新的Excel文件。"
+downloadButton = "下载Excel"
+generateButton = "生成Excel"
+supportedFormats = "支持格式"
+title = "Excel智能提取"
+
+[smartExtractExcel.advanced]
+asc = "升序"
+deduplicate = "去重"
+desc = "降序"
+groupBy = "按字段分组生成多个sheet"
+removeEmptyRows = "删除空行"
+sortColumn = "排序字段"
+sortDirection = "排序方向"
+title = "高级选项"
+
+[smartExtractExcel.columns]
+title = "选择保留字段"
+
+[smartExtractExcel.filters]
+add = "添加筛选条件"
+column = "字段"
+contains = "包含"
+date = "日期"
+empty = "暂无筛选条件。"
+endDate = "结束日期"
+number = "数值"
+operator = "条件"
+remove = "删除筛选条件"
+startDate = "开始日期"
+text = "文本"
+title = "筛选条件"
+type = "类型"
+value = "值"
+
+[smartExtractExcel.preview]
+empty = "上传Excel后，这里会显示 sheet、表头和前 20 行预览。"
+title = "数据预览"
+
+[smartExtractExcel.requirement]
+empty = "\u8bf7\u5148\u8f93\u5165\u63d0\u53d6\u9700\u6c42\u3002"
+aiDisabled = "AI\u670d\u52a1\u672a\u542f\u7528\uff0c\u8bf7\u68c0\u67e5 EXCEL_AI_BASE_URL\u3001EXCEL_AI_API_KEY\u3001EXCEL_AI_MODEL\u3002"
+aiEnabled = "AI\u670d\u52a1\u5df2\u542f\u7528\u3002"
+checkAiButton = "\u68c0\u67e5AI\u914d\u7f6e"
+hint = "AI\u4f1a\u628a\u9700\u6c42\u8f6c\u6362\u6210\u4e0b\u65b9\u89c4\u5219\uff0c\u751f\u6210Excel\u524d\u4ecd\u53ef\u624b\u52a8\u8c03\u6574\u3002"
+parseButton = "AI\u89e3\u6790\u9700\u6c42"
+placeholder = "\u793a\u4f8b\uff1a\u63d0\u53d6\u8d22\u52a1\u90e8\u91d1\u989d\u5927\u4e8e1000\u7684\u8bb0\u5f55\uff0c\u53ea\u4fdd\u7559\u59d3\u540d\u3001\u91d1\u989d\u3001\u65e5\u671f\uff0c\u6309\u91d1\u989d\u4ece\u9ad8\u5230\u4f4e\u6392\u5e8f\u3002"
+title = "AI\u9700\u6c42"
+
+[smartExtractExcel.aiResult]
+columns = "\u4fdd\u7559\u5b57\u6bb5"
+confidence = "\u7f6e\u4fe1\u5ea6"
+extractMode = "\u660e\u7ec6\u63d0\u53d6"
+filters = "\u7b5b\u9009\u6761\u4ef6"
+groupBy = "\u5206\u7ec4\u5b57\u6bb5"
+matchedHeader = "Excel\u5b57\u6bb5"
+mappingMatched = "\u5df2\u5339\u914d"
+mappingReview = "\u5efa\u8bae\u786e\u8ba4"
+mappings = "\u5b57\u6bb5\u5339\u914d\u7ed3\u679c"
+mappingStatus = "\u72b6\u6001"
+mappingUncertain = "\u4e0d\u786e\u5b9a"
+metrics = "\u7edf\u8ba1\u6307\u6807"
+mode = "\u5f53\u524d\u6a21\u5f0f"
+options = "\u9ad8\u7ea7\u9009\u9879"
+sort = "\u6392\u5e8f\u65b9\u5f0f"
+summaryMode = "\u6c47\u603b\u7edf\u8ba1"
+title = "AI\u89e3\u6790\u7ed3\u679c"
+userField = "\u7528\u6237\u63cf\u8ff0\u5b57\u6bb5"
+
+[smartExtractExcel.result]
+rowCount = "生成行数"
+
+[smartExtractExcel.sheet]
+label = "选择Sheet"
+
+[smartExtractExcel.status]
+failed = "请求失败。"
+generating = "正在生成Excel..."
+noFile = "请先上传Excel文件。"
+parsing = "正在解析Excel表头..."
+parsingRequirement = "AI\u6b63\u5728\u89e3\u6790\u9700\u6c42..."
+unsupported = "请上传 .xlsx 或 .xls 文件。"
+waiting = "等待上传Excel文件"
+
+[smartExtractExcel.upload]
+noFile = "未选择文件"
+title = "拖拽Excel文件到这里，或点击选择"
+
+[smartMergeExcel]
+description = "上传多个Excel文件或选择多个Sheet，描述合并需求后生成新的Excel文件。"
+downloadButton = "下载Excel"
+generateButton = "确认并合并"
+title = "智能表格合并"
+
+[smartCleanExcel]
+description = "上传Excel后检测空行、重复、格式混乱等问题，使用AI生成清洗规则并导出清洗后的工作簿。"
+downloadButton = "下载Excel"
+generateButton = "生成清洗后Excel"
+title = "Excel智能数据清洗"
+
+[smartCleanExcel.quality]
+blankCells = "空白单元格"
+column = "字段"
+columns = "字段数"
+detectedType = "识别类型"
+duplicates = "重复行"
+emptyRows = "空行"
+issues = "问题"
+rows = "数据行"
+sheet = "Sheet"
+title = "数据质量报告"
+trimIssues = "首尾空格"
+
+[smartCleanExcel.requirement]
+parseButton = "AI生成清洗规则"
+placeholder = "例如：删除空行和重复数据，去除文本首尾空格，将金额标准化为数字，将日期统一为yyyy-MM-dd，并把财务映射为财务部。"
+title = "AI清洗需求"
+
+[smartCleanExcel.result]
+duplicates = "删除重复行"
+emptyRows = "删除空行"
+invalidValues = "异常值"
+resultRows = "结果行"
+sourceRows = "原始行"
+title = "清洗完成"
+
+[smartCleanExcel.rules]
+column = "字段"
+deduplicate = "去重"
+fullRow = "整行"
+invalidPolicy = "异常值"
+normalizeFullWidth = "全角转半角"
+operation = "操作"
+removeEmptyRows = "删除空行"
+title = "清洗规则"
+trimText = "去除首尾空格"
+valueMappings = "值映射"
+
+[smartCleanExcel.status]
+analyzing = "正在上传并检测数据质量..."
+failed = "请求失败。"
+generating = "正在生成清洗后的Excel..."
+noFile = "请先上传Excel文件。"
+noRequirement = "请先输入清洗需求。"
+noRules = "请先解析或确认清洗规则。"
+parsing = "AI正在生成清洗规则..."
+unsupported = "请上传 .xlsx 或 .xls 文件。"
+waiting = "等待上传Excel文件"
+
+[smartCleanExcel.upload]
+hint = "一个 .xlsx 或 .xls 文件"
+title = "拖拽Excel到这里，或点击选择"
+
+[smartMergeExcel.result]
+columns = "输出字段"
+duplicates = "删除重复"
+resultRows = "生成结果"
+sourceCount = "数据源"
+sourceRows = "原始数据"
+title = "表格合并完成"
+
+[smartMergeExcel.rules]
+columns = "输出字段"
+confidence = "置信度"
+deduplicate = "去重规则"
+fullRow = "整行去重"
+mergeType = "合并方式"
+sources = "来源字段"
+target = "目标字段"
+title = "AI合并方案"
+
+[smartMergeExcel.sources]
+file = "文件"
+headers = "表头"
+rows = "行数"
+sheet = "Sheet"
+title = "数据源选择"
+use = "使用"
+
+[smartMergeExcel.requirement]
+parseButton = "AI分析合并方案"
+placeholder = "例如：把所有报销表合并成一张总表，把报销金额和费用金额统一为金额，只保留姓名、部门、金额、日期，按姓名和日期去重。"
+title = "表格合并需求"
+
+[smartMergeExcel.status]
+failed = "请求失败。"
+generating = "正在合并表格..."
+noRequirement = "请先输入合并需求。"
+noRules = "请先分析或确认合并规则。"
+noSource = "请先选择数据源。"
+parsing = "AI正在分析合并方案..."
+unsupported = "请上传 .xlsx 或 .xls 文件。"
+uploading = "正在上传并解析文件..."
+waiting = "等待上传Excel文件"
+
+[smartMergeExcel.upload]
+hint = "最多20个Excel文件"
+title = "拖拽Excel文件到这里，或点击选择"
 
 [tools]
 noSearchResults = "未找到工具"

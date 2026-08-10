@@ -1,19 +1,18 @@
 import { useMemo, useState } from "react";
 import {
-  Alert,
-  Badge,
   Button,
   Group,
-  Paper,
-  Stack,
-  Table,
   Text,
-  Title,
 } from "@mantine/core";
-import { Dropzone } from "@mantine/dropzone";
 import { useTranslation } from "react-i18next";
 import FileUploadRoundedIcon from "@mui/icons-material/FileUploadRounded";
 import DownloadRoundedIcon from "@mui/icons-material/DownloadRounded";
+import {
+  ExcelDataPreview,
+  ExcelStatusMessage,
+  ExcelToolShell,
+  ExcelUploadZone,
+} from "@app/components/excel/ExcelToolShell";
 import apiClient from "@app/services/apiClient";
 import { BaseToolProps, ToolComponent } from "@app/types/tool";
 
@@ -23,6 +22,7 @@ type ExtractTableResponse = {
   previewData: string[][];
   downloadUrl: string | null;
   fileName?: string | null;
+  quality?: string | null;
 };
 
 const ACCEPTED_MIME_TYPES = [
@@ -42,6 +42,8 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
 
   const hasPreviewRows = (result?.previewData?.length ?? 0) > 0;
   const previewData = result?.previewData ?? [];
+  const previewHeaders = previewData[0] ?? [];
+  const previewRows = previewData.slice(1);
   const downloadHref = useMemo(() => {
     if (!result?.downloadUrl) {
       return undefined;
@@ -58,12 +60,8 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
 
     return result.downloadUrl;
   }, [result?.downloadUrl]);
-  const fileLabel = useMemo(() => {
-    if (!selectedFile) {
-      return t("tableExtractExcel.upload.noFile", "No file selected");
-    }
-    return selectedFile.name;
-  }, [selectedFile, t]);
+  const isPdfFile = (file: File) =>
+    file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
 
   const handleFiles = (files: File[]) => {
     const nextFile = files[0] ?? null;
@@ -76,6 +74,12 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
     );
   };
 
+  const handleReset = () => {
+    setSelectedFile(null);
+    setResult(null);
+    setStatusMessage(t("tableExtractExcel.status.waiting", "Waiting for a file"));
+  };
+
   const handleSubmit = async () => {
     if (!selectedFile) {
       setStatusMessage(
@@ -86,7 +90,15 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
 
     setIsProcessing(true);
     setStatusMessage(
-      t("tableExtractExcel.status.processing", "Processing test request..."),
+      isPdfFile(selectedFile)
+        ? t(
+            "tableExtractExcel.status.detectingType",
+            "Detecting PDF type and extracting tables...",
+          )
+        : t(
+            "tableExtractExcel.status.ocrProcessing",
+            "Running OCR table recognition...",
+          ),
     );
 
     const formData = new FormData();
@@ -103,7 +115,11 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
         },
       );
       setResult(response.data);
-      setStatusMessage(response.data.message);
+      setStatusMessage(
+        response.data.success
+          ? t("tableExtractExcel.status.completed", "Extraction completed.")
+          : response.data.message,
+      );
     } catch (error) {
       const message =
         error instanceof Error
@@ -117,30 +133,33 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
   };
 
   return (
-    <Stack gap="md" p="md">
-      <Stack gap={4}>
-        <Title order={2} size="h3">
-          {t("tableExtractExcel.title", "Extract Table to Excel")}
-        </Title>
-        <Text c="dimmed" size="sm">
-          {t(
-            "tableExtractExcel.description",
-            "Upload a screenshot, image, or PDF. Later this tool will automatically detect tables and export them to Excel.",
-          )}
-        </Text>
-        <Group gap="xs" mt={4}>
-          <Text size="xs" c="dimmed">
-            {t("tableExtractExcel.supportedFormats", "Supported formats")}
-          </Text>
-          {["PNG", "JPG", "JPEG", "PDF"].map((format) => (
-            <Badge key={format} variant="light" size="sm">
-              {format}
-            </Badge>
-          ))}
-        </Group>
-      </Stack>
-
-      <Dropzone
+    <ExcelToolShell
+      title={t("tableExtractExcel.title", "Extract Table to Excel")}
+      description={t(
+        "tableExtractExcel.description",
+        "Upload a screenshot, image, or PDF. This tool detects tables and exports them to Excel.",
+      )}
+      badges={["PDF", "OCR", "PNG", "JPG", "Excel"]}
+      steps={[
+        {
+          label: t("excelCommon.steps.upload", "Upload file"),
+          state: selectedFile ? "done" : "active",
+        },
+        {
+          label: t("excelCommon.steps.recognize", "Recognize table"),
+          state: isProcessing ? "active" : result ? (result.success ? "done" : "error") : "idle",
+        },
+        {
+          label: t("excelCommon.steps.confirm", "Confirm result"),
+          state: result ? (result.success ? "done" : "error") : "idle",
+        },
+        {
+          label: t("excelCommon.steps.download", "Download Excel"),
+          state: downloadHref ? "active" : "idle",
+        },
+      ]}
+    >
+      <ExcelUploadZone
         accept={ACCEPTED_MIME_TYPES}
         maxFiles={1}
         multiple={false}
@@ -153,28 +172,27 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
             ),
           )
         }
-        p="lg"
-        styles={{
-          root: {
-            borderStyle: "dashed",
-            borderColor: "var(--border-color)",
-            backgroundColor: "var(--bg-elevated)",
-          },
-        }}
-      >
-        <Stack align="center" gap="xs">
-          <FileUploadRoundedIcon fontSize="large" />
-          <Text fw={600}>
-            {t(
-              "tableExtractExcel.upload.title",
-              "Drag a file here, or click to choose",
-            )}
-          </Text>
-          <Text size="sm" c="dimmed">
-            {fileLabel}
-          </Text>
-        </Stack>
-      </Dropzone>
+        title={t("tableExtractExcel.upload.title", "Drag a file here, or click to choose")}
+        hint={t("tableExtractExcel.upload.hint", "PNG, JPG, JPEG or PDF")}
+        files={
+          selectedFile
+            ? [
+                {
+                  name: selectedFile.name,
+                  size: selectedFile.size,
+                  type: selectedFile.type || selectedFile.name.split(".").pop(),
+                  status: result
+                    ? result.success
+                      ? t("excelCommon.upload.done", "Parsed")
+                      : t("excelCommon.upload.failed", "Failed")
+                    : selectedFile
+                      ? t("excelCommon.upload.ready", "Ready")
+                      : undefined,
+                },
+              ]
+            : []
+        }
+      />
 
       <Group justify="space-between" align="center">
         <Button
@@ -185,23 +203,34 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
         >
           {t("tableExtractExcel.uploadButton", "Upload")}
         </Button>
-        <Text size="sm" c={result?.success ? "green" : "dimmed"}>
-          {statusMessage}
-        </Text>
+        <Button variant="subtle" onClick={handleReset}>
+          {t("tableExtractExcel.reuploadButton", "Upload again")}
+        </Button>
       </Group>
 
-      <Alert color="blue" variant="light">
+      <ExcelStatusMessage
+        message={statusMessage}
+        tone={result ? (result.success ? "success" : "warning") : "info"}
+      />
+
+      <Text c="dimmed" size="sm">
         {t(
           "tableExtractExcel.testVersionNotice",
-          "This version supports generating Excel files. Real PDF table extraction and screenshot OCR will be enabled in the next stage.",
+          "This version supports text-based PDF extraction, screenshot table recognition, image table recognition, and scanned PDF table recognition.",
         )}
-      </Alert>
+      </Text>
 
-      <Paper withBorder radius="md" p="md">
-        <Group justify="space-between" mb="sm">
-          <Title order={3} size="h4">
-            {t("tableExtractExcel.preview.title", "Result preview")}
-          </Title>
+      <ExcelDataPreview
+        title={t("tableExtractExcel.preview.title", "Result preview")}
+        headers={previewHeaders}
+        rows={previewRows}
+        totalRows={hasPreviewRows ? previewRows.length : undefined}
+        columnCount={previewHeaders.length || undefined}
+        emptyText={t(
+          "tableExtractExcel.preview.empty",
+          "Upload a file to show extracted table data here.",
+        )}
+        action={
           <Button
             leftSection={<DownloadRoundedIcon fontSize="small" />}
             disabled={!downloadHref}
@@ -211,38 +240,14 @@ const TableExtractExcel = ({ onError }: BaseToolProps) => {
           >
             {t("tableExtractExcel.downloadButton", "Download Excel")}
           </Button>
-        </Group>
-
-        {hasPreviewRows ? (
-          <Table striped withTableBorder withColumnBorders>
-            <Table.Tbody>
-              {previewData.map((row, rowIndex) => (
-                <Table.Tr key={`row-${rowIndex}`}>
-                  {row.map((cell, cellIndex) =>
-                    rowIndex === 0 ? (
-                      <Table.Th key={`cell-${rowIndex}-${cellIndex}`}>
-                        {cell}
-                      </Table.Th>
-                    ) : (
-                      <Table.Td key={`cell-${rowIndex}-${cellIndex}`}>
-                        {cell}
-                      </Table.Td>
-                    ),
-                  )}
-                </Table.Tr>
-              ))}
-            </Table.Tbody>
-          </Table>
-        ) : (
-          <Text c="dimmed" size="sm">
-            {t(
-              "tableExtractExcel.preview.empty",
-              "Upload a file to show mock preview data here.",
-            )}
-          </Text>
-        )}
-      </Paper>
-    </Stack>
+        }
+      />
+      {result?.quality ? (
+        <Text size="sm" c="dimmed">
+          {t("tableExtractExcel.qualityLabel", "Recognition quality")}: {result.quality}
+        </Text>
+      ) : null}
+    </ExcelToolShell>
   );
 };
 

@@ -4359,6 +4359,89 @@ desc = "Upload a screenshot, image, or PDF table and preview extracted data befo
 tags = "excel,table,spreadsheet,extract table,table extraction,OCR,XLSX"
 title = "Extract Table to Excel"
 
+[home.smartExtractExcel]
+desc = "Upload Excel, keep fields, filter rows, group data, and regenerate a new Excel file"
+tags = "excel,smart extract,spreadsheet,filter,group,xlsx"
+title = "Smart Extract & Regenerate"
+
+[home.smartMergeExcel]
+desc = "Upload multiple Excel files or sheets, use AI to map fields, and merge them into a new Excel file"
+tags = "excel,merge,join,append,spreadsheet,xlsx"
+title = "Smart Table Merge"
+
+[home.smartCleanExcel]
+desc = "Upload Excel, detect quality issues, use AI to create cleaning rules, and generate a cleaned workbook"
+tags = "excel,clean,normalize,deduplicate,spreadsheet,xlsx"
+title = "Smart Data Clean"
+
+[home.imageInfoExtractExcel]
+desc = "Upload images, run OCR, structure the text with AI, and export to Excel"
+tags = "excel,image,OCR,invoice,document,receipt"
+title = "Image Info to Table"
+
+[excelCommon.aiRequirement]
+description = "Use one sentence to describe how you want to process the current Excel data."
+title = "Describe your requirement"
+
+[excelCommon.aiResult]
+title = "AI understanding result"
+
+[excelCommon.buttons]
+aiAnalyze = "AI analyze requirement"
+confirmProcess = "Confirm and process"
+downloadExcel = "Download Excel"
+
+[excelCommon.result]
+title = "Processing completed"
+
+[excelCommon.steps]
+analyzeData = "Analyze data"
+confirm = "Confirm result"
+confirmPlan = "Confirm plan"
+download = "Download Excel"
+generate = "Generate result"
+recognize = "Recognize table"
+requirement = "Set requirement"
+selectData = "Select data"
+upload = "Upload file"
+
+[excelCommon.upload]
+done = "Completed"
+failed = "Failed"
+parsed = "Parsed"
+parsing = "Parsing"
+ready = "Ready"
+
+[excelToolsHome]
+description = "Choose an Excel workflow for extraction, filtering, summary, merge, or data cleaning."
+openButton = "Open tool"
+title = "Excel Tools"
+
+[excelToolsHome.smartClean]
+desc = "Detect and clean duplicates, blanks, dates, amount formats, and other data issues."
+
+[excelToolsHome.imageInfoExtract]
+desc = "Extract text from invoices, licenses, express sheets, contracts, and images, then structure it into Excel."
+
+[excelToolsHome.smartExtract]
+desc = "Filter data by fields, conditions, and natural language requirements, then regenerate Excel."
+
+[excelToolsHome.smartMerge]
+desc = "Merge multiple Excel files or sheets and automatically unify fields."
+
+[excelToolsHome.steps]
+choose = "Choose tool"
+download = "Download Excel"
+process = "Process"
+upload = "Upload data"
+
+[excelToolsHome.summary]
+desc = "Summarize amount, count, average, max and min by department, project, or person."
+title = "AI Summary Statistics"
+
+[excelToolsHome.tableExtract]
+desc = "Recognize tables from PDFs, screenshots, and scanned files, then generate Excel."
+
 [home.getPdfInfo]
 desc = "Grabs any and all information possible on PDFs"
 tags = "info,metadata,details,PDF info,document info,properties,file info,get info,show info,view properties,document properties,statistics,page count,file details,inspect"
@@ -7809,28 +7892,235 @@ signing = "Signing"
 verification = "Verification"
 
 [tableExtractExcel]
-description = "Upload a screenshot, image, or PDF. Later this tool will automatically detect tables and export them to Excel."
+description = "Upload a screenshot, image, or PDF. This tool detects tables and exports them to Excel."
 downloadButton = "Download Excel"
+qualityLabel = "Recognition quality"
+reuploadButton = "Upload again"
 supportedFormats = "Supported formats"
-testVersionNotice = "This version supports generating Excel files. Real PDF table extraction and screenshot OCR will be enabled in the next stage."
+testVersionNotice = "This version supports text-based PDF extraction, screenshot table recognition, image table recognition, and scanned PDF table recognition."
 title = "Extract Table to Excel"
 uploadButton = "Upload"
 
 [tableExtractExcel.preview]
-empty = "Upload a file to show mock preview data here."
+empty = "Upload a file to show extracted table data here."
 title = "Result preview"
 
 [tableExtractExcel.status]
 failed = "The request failed."
+completed = "Extraction completed."
+detectingType = "Detecting PDF type and extracting tables..."
+extractingPdf = "Extracting PDF table..."
 noFile = "Please select a file first."
+ocrProcessing = "Running OCR table recognition..."
 processing = "Generating Excel file..."
 ready = "File selected. Ready to upload."
 unsupported = "Please choose a PNG, JPG, JPEG, or PDF file."
+uploading = "Uploading file..."
 waiting = "Waiting for a file"
 
 [tableExtractExcel.upload]
 noFile = "No file selected"
 title = "Drag a file here, or click to choose"
+
+[smartExtractExcel]
+description = "Upload an Excel file, extract rows by fields, keywords, numbers, dates, grouping, and regenerate a new Excel file."
+downloadButton = "Download Excel"
+generateButton = "Generate Excel"
+supportedFormats = "Supported formats"
+title = "Excel Smart Extract"
+
+[smartExtractExcel.advanced]
+asc = "Ascending"
+deduplicate = "Deduplicate"
+desc = "Descending"
+groupBy = "Group by column"
+removeEmptyRows = "Remove empty rows"
+sortColumn = "Sort column"
+sortDirection = "Direction"
+title = "Advanced options"
+
+[smartExtractExcel.columns]
+title = "Columns to keep"
+
+[smartExtractExcel.filters]
+add = "Add filter"
+column = "Column"
+contains = "Contains"
+date = "Date"
+empty = "No filters added."
+endDate = "End date"
+number = "Number"
+operator = "Operator"
+remove = "Remove filter"
+startDate = "Start date"
+text = "Text"
+title = "Filters"
+type = "Type"
+value = "Value"
+
+[smartExtractExcel.preview]
+empty = "Upload an Excel file to preview sheets and headers."
+title = "Data preview"
+
+[smartExtractExcel.requirement]
+empty = "Please enter the extraction requirement first."
+aiDisabled = "AI service is not enabled. Please check EXCEL_AI_BASE_URL, EXCEL_AI_API_KEY, and EXCEL_AI_MODEL."
+aiEnabled = "AI service is enabled."
+checkAiButton = "Check AI config"
+hint = "AI converts the description into the rules below. You can still adjust them manually before generating Excel."
+parseButton = "AI parse requirement"
+placeholder = "Example: extract finance department records with amount greater than 1000, keep name, amount and date, and sort amount from high to low."
+title = "AI requirement"
+
+[smartExtractExcel.aiResult]
+columns = "Columns"
+confidence = "Confidence"
+extractMode = "Detail extract"
+filters = "Filters"
+groupBy = "Group by"
+matchedHeader = "Excel field"
+mappingMatched = "Matched"
+mappingReview = "Review suggested"
+mappings = "Field mappings"
+mappingStatus = "Status"
+mappingUncertain = "Uncertain"
+metrics = "Metrics"
+mode = "Mode"
+options = "Options"
+sort = "Sort"
+summaryMode = "Summary"
+title = "AI parsed rules"
+userField = "User field"
+
+[smartExtractExcel.result]
+rowCount = "Rows generated"
+
+[smartExtractExcel.sheet]
+label = "Sheet"
+
+[smartExtractExcel.status]
+failed = "The request failed."
+generating = "Generating Excel..."
+noFile = "Please upload an Excel file first."
+parsing = "Parsing Excel headers..."
+parsingRequirement = "AI is parsing requirement..."
+unsupported = "Please upload a .xlsx or .xls file."
+waiting = "Waiting for an Excel file"
+
+[smartExtractExcel.upload]
+noFile = "No file selected"
+title = "Drag an Excel file here, or click to choose"
+
+[smartMergeExcel]
+description = "Upload multiple Excel files or choose multiple sheets, describe how to merge them, and generate a new Excel file."
+downloadButton = "Download Excel"
+generateButton = "Confirm and merge"
+title = "Smart Table Merge"
+
+[smartCleanExcel]
+description = "Upload Excel, detect empty rows, duplicates and mixed formats, then use AI to create cleaning rules and generate a clean workbook."
+downloadButton = "Download Excel"
+generateButton = "Generate cleaned Excel"
+title = "Excel Smart Data Clean"
+
+[smartCleanExcel.quality]
+blankCells = "Blank cells"
+column = "Column"
+columns = "Columns"
+detectedType = "Detected type"
+duplicates = "Duplicates"
+emptyRows = "Empty rows"
+issues = "Issues"
+rows = "Rows"
+sheet = "Sheet"
+title = "Data quality report"
+trimIssues = "Trim issues"
+
+[smartCleanExcel.requirement]
+parseButton = "AI create cleaning rules"
+placeholder = "Example: remove empty rows and duplicates, trim text, normalize amount to numbers, normalize date to yyyy-MM-dd, and map Finance to Finance Dept."
+title = "AI cleaning requirement"
+
+[smartCleanExcel.result]
+duplicates = "Removed duplicates"
+emptyRows = "Removed empty rows"
+invalidValues = "Invalid values"
+resultRows = "Result rows"
+sourceRows = "Source rows"
+title = "Cleaning completed"
+
+[smartCleanExcel.rules]
+column = "Column"
+deduplicate = "Deduplicate"
+fullRow = "Full row"
+invalidPolicy = "Invalid values"
+normalizeFullWidth = "Normalize full-width text"
+operation = "Operation"
+removeEmptyRows = "Remove empty rows"
+title = "Cleaning rules"
+trimText = "Trim text"
+valueMappings = "Value mappings"
+
+[smartCleanExcel.status]
+analyzing = "Uploading and analyzing quality..."
+failed = "The request failed."
+generating = "Generating cleaned Excel..."
+noFile = "Please upload an Excel file first."
+noRequirement = "Please enter a cleaning requirement first."
+noRules = "Please analyze or confirm cleaning rules first."
+parsing = "AI is creating cleaning rules..."
+unsupported = "Please upload .xlsx or .xls files."
+waiting = "Waiting for an Excel file"
+
+[smartCleanExcel.upload]
+hint = "One .xlsx or .xls file"
+title = "Drag an Excel file here, or click to choose"
+
+[smartMergeExcel.result]
+columns = "Output columns"
+duplicates = "Removed duplicates"
+resultRows = "Result rows"
+sourceCount = "Sources"
+sourceRows = "Source rows"
+title = "Merge completed"
+
+[smartMergeExcel.rules]
+columns = "Output columns"
+confidence = "Confidence"
+deduplicate = "Deduplicate"
+fullRow = "Full row"
+mergeType = "Merge type"
+sources = "Source fields"
+target = "Target field"
+title = "AI merge plan"
+
+[smartMergeExcel.sources]
+file = "File"
+headers = "Headers"
+rows = "Rows"
+sheet = "Sheet"
+title = "Data sources"
+use = "Use"
+
+[smartMergeExcel.requirement]
+parseButton = "AI analyze merge plan"
+placeholder = "Example: merge all reimbursement tables into one sheet, map reimbursement amount and expense amount to amount, keep name, department, amount and date, and deduplicate by name plus date."
+title = "Merge requirement"
+
+[smartMergeExcel.status]
+failed = "The request failed."
+generating = "Merging tables..."
+noRequirement = "Please enter merge requirement first."
+noRules = "Please analyze or confirm merge rules first."
+noSource = "Please select data sources first."
+parsing = "AI is analyzing merge plan..."
+unsupported = "Please upload .xlsx or .xls files."
+uploading = "Uploading and parsing files..."
+waiting = "Waiting for Excel files"
+
+[smartMergeExcel.upload]
+hint = "Up to 20 Excel files"
+title = "Drag Excel files here, or click to choose"
 
 [tools]
 noSearchResults = "No tools found"
